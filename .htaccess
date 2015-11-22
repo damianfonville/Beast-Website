@@ -1,0 +1,19 @@
+RewriteEngine On
+
+RewriteRule    ^product/([0-9]+)/?$    rewrite/product.php?pid=$1    [NC,L]
+RewriteRule    ^factuur/([0-9]+)/?$    rewrite/facture.php?fid=$1    [NC,L]
+RewriteRule    ^categorie/([A-Za-z0-9-]+)/?$    rewrite/category.php?q=$1    [NC,L]
+RewriteRule    ^winkelwagen/([A-Za-z0-9-]+)/([0-9])/?$    rewrite/cart.php?$1=$2    [NC,L]
+RewriteRule    ^categorie(.*)n/?$    rewrite/category.php    [NC,L]
+RewriteRule    ^winkelwagen/?$    rewrite/cart.php    [NC,L]
+RewriteRule    ^login/?$    rewrite/login.php    [NC,L]
+RewriteRule    ^registeren/?$    rewrite/register.php    [NC,L]
+RewriteRule    ^profiel/?$    rewrite/profile.php    [NC,L]
+RewriteRule    ^checkout/?$    rewrite/checkout.php    [NC,L]
+RewriteRule    ^voltooid/?$    rewrite/succes.php    [NC,L]
+RewriteRule    ^logout/?$    rewrite/logout.php    [NC,L]
+RewriteRule    ^facturen/?$    rewrite/facture.php    [NC,L]
+RewriteRule    ^config.json/?$    index.php    [NC,L]
+
+ErrorDocument 404 /404.php
+ErrorDocument 403 /404.php

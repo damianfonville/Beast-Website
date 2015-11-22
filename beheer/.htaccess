@@ -1,0 +1,17 @@
+RewriteEngine On
+
+RewriteRule    ^product/([0-9]+)/?$    rewrite/product.php?pid=$1    [NC,L]
+RewriteRule    ^factuur/([0-9]+)/?$    rewrite/facture.php?fid=$1    [NC,L]
+RewriteRule    ^gebruiker/([0-9]+)/?$    rewrite/user.php?uid=$1    [NC,L]
+RewriteRule    ^vooraad/([0-9]+)/?$    rewrite/stock.php?pid=$1    [NC,L]
+RewriteRule    ^facturen/?$    rewrite/facture.php    [NC,L]
+RewriteRule    ^gebruikers/?$    rewrite/user.php    [NC,L]
+RewriteRule    ^producten/?$    rewrite/product.php    [NC,L]
+RewriteRule    ^producten/toevoegen/?$    rewrite/product.php?add    [NC,L]
+RewriteRule    ^product/bewerk/([0-9]+)/?$    rewrite/product.php?edit&pid=$1    [NC,L]
+RewriteRule    ^product/delete/([0-9]+)/?$    rewrite/product.php?delete&pid=$1    [NC,L]
+RewriteRule    ^gebruikers/toevoegen/?$    rewrite/user.php?add    [NC,L]
+RewriteRule    ^gebruiker/bewerk/([0-9]+)/?$    rewrite/user.php?edit&uid=$1    [NC,L]
+RewriteRule    ^gebruiker/delete/([0-9]+)/?$    rewrite/user.php?delete&uid=$1    [NC,L]
+
+ErrorDocument 404 /404.php
