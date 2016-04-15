@@ -9,7 +9,6 @@ class Products
     public static function lastFour($q = null)
     {
         global $db;
-        //$db = new PDO('mysql:host=localhost;dbname=beast', 'root', '');
         if(!$q)
             {
                 try {
@@ -44,31 +43,23 @@ class Products
     public static function create_thumbnail($base64, $left = 0)
     {
         ob_start();
-        // get image
         $src = imagecreatefromstring($base64);
 
-// dimensions (just to be safe, should always be 185x127 though)
         $src_wide = imagesx($src);
         $src_high = imagesy($src);
 
-// set white padding color
         $clear = array('red'=>255,'green'=>255,'blue'=>255);
 
-// new image dimensions with right padding
         $dst_wide = $src_wide+600;
         $dst_high = $src_high;
 
-// New resource image at new size
         $dst = imagecreatetruecolor($dst_wide, $dst_high);
 
-// fill the image with the white padding color
         $clear = imagecolorallocate( $dst, $clear["red"], $clear["green"], $clear["blue"]);
         imagefill($dst, 0, 0, $clear);
 
-// copy the original image on top of the new one
         imagecopymerge($dst,$src,$left,0,0,0,$src_wide,$src_high, 100);
 
-// store the new image in tmp directory
 
         imagepng($dst);
         $contents =  ob_get_contents();
@@ -80,7 +71,7 @@ class Products
 
     public static function getProduct($pid)
     {
-        $db = new PDO('mysql:host=localhost;dbname=beast', 'root', '');
+        global $db;
 
         $dbproduct = $db->prepare("SELECT stock.stock, product.* FROM product INNER JOIN stock ON product.pid=stock.pid WHERE lid = 1 AND product.pid = ?");
         $dbproduct->bindValue(1, $pid, PDO::PARAM_INT);

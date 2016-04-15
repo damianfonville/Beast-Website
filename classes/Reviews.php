@@ -17,7 +17,6 @@ class Reviews
     {
         global $db;
         try {
-            //$db = new PDO('mysql:host=localhost;dbname=beast', 'root', '');
 
             $dbreviews = $db->prepare("SELECT reviews.*, user.name, user.lastname FROM reviews INNER JOIN user ON reviews.uid=user.uid WHERE pid = ? ORDER BY created_at DESC");
             $dbreviews->bindValue(1, $pid, PDO::PARAM_INT);
@@ -32,7 +31,7 @@ class Reviews
 
     public static function getStars($pid)
     {
-        $db = new PDO('mysql:host=localhost;dbname=beast', 'root', '');
+        global $db;
 
         $dbreviews = $db->prepare("SELECT AVG(rating) as gem, count(id) as aantal FROM reviews WHERE pid = ?");
         $dbreviews->bindValue(1, $pid, PDO::PARAM_INT);
@@ -45,7 +44,6 @@ class Reviews
     {
         global $db;
         try {
-            //$db = new PDO('mysql:host=localhost;dbname=beast', 'root', '');
 
             $date = date("Y-m-d H:i:s");
 
@@ -76,11 +74,10 @@ class Reviews
         $weeks 		= round($time_elapsed / 604800);
         $months 	= round($time_elapsed / 2600640 );
         $years 		= round($time_elapsed / 31207680 );
-// Seconds
         if($seconds <= 60 && $seconds > 0){
             return "$seconds seconden geleden";
         }
-//Minutes
+
         else if($minutes <=60  && $minutes > 0){
             if($minutes==1){
                 return "1 minuut geleden";
@@ -89,11 +86,11 @@ class Reviews
                 return "$minutes minuten geleden";
             }
         }
-//Hours
+
         else if($hours <=24 && $hours > 0){
             return "$hours uur geleden";
         }
-//Days
+
         else if($days <= 7 && $days > 0){
             if($days==1){
                 return "gisteren";
@@ -101,7 +98,7 @@ class Reviews
                 return "$days dagen geleden";
             }
         }
-//Weeks
+
         else if($weeks <= 4.3 && $weeks > 0){
             if($weeks==1){
                 return "1 week geleden";
@@ -109,7 +106,7 @@ class Reviews
                 return "$weeks weken geleden";
             }
         }
-//Months
+
         else if($months <=12 && $months > 0 ){
             if($months==1){
                 return "1 maand geleden";
