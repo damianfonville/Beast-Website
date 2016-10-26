@@ -1,0 +1,60 @@
+<?php
+
+
+
+if(isset($_POST['install'])) {
+    try {
+        $db = new PDO('mysql:host=localhost;', 'root', '');
+        $sql = file_get_contents("install.sql"); //file name should be name of SQL file with .sql extension.
+        $qr = $db->exec($sql);
+echo($qr); // if query execut successfully, this will print 0 else 1
+} catch (PDOException $e) {
+echo 'Connection failed: ' . $e->getMessage();
+}
+}
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="/bootstrap/css/cover.css" rel="stylesheet"/>
+
+    </head>
+    <body>
+    <div class="site-wrapper">
+
+        <div class="site-wrapper-inner">
+
+            <div class="cover-container">
+
+                <div class="masthead clearfix">
+                    <div class="inner">
+                        <h3 class="masthead-brand">Installeren</h3>
+                    </div>
+                </div>
+
+                <div class="inner cover">
+                    <div class="alert alert-success text-left"><span class="glyphicon glyphicon-ok"></span> De site is succesvol geinstaleerd</div>
+                    <form action="" method="post">
+
+                        <input type="submit" name="install" class="btn btn-lg btn-primary" value="Instaleren">
+                    </form>
+                </div>
+
+                <div class="mastfoot">
+                    <div class="inner">
+                        <p>Copyright &copy; Beast.nl 2015.</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </body>
+    <script src="/bootstrap/js/jquery.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+</html>
